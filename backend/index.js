@@ -15,6 +15,9 @@ app.get("/jodel", async (req, res) => {
 
 app.post("/jodel", async (req, res) => {
   const body = req.body;
+  if (!body.content === "") {
+    return res.status(400).send("Content cannot be empty");
+  }
   const newJodel = new Jodel({
     content: body.content,
     author: body.author,
@@ -49,7 +52,7 @@ const errorHandler = (error, request, response, next) => {
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
   } else if (error.name === "ValidationError") {
-    return response.status(400).json({ error: error.message });
+    return response.status(400).send({ error: error.message });
   }
 
   next(error);

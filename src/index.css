@@ -2,6 +2,15 @@
   .title {
     text-align: center;
   }
+  .login-button {
+    margin-left: 20px;
+  }
+  .login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
   .jodel-form {
     width: 80%;
@@ -22,7 +31,6 @@
   .button-primary:focus {
     background-color: rgb(175, 119, 227);
     border-color: rgb(94, 94, 201);
-
   }
 
   .loading {
@@ -38,7 +46,7 @@
     width: 65%; /* Adjust this as needed */
     margin: 0 auto; /* This will center your flex container */
   }
-  
+
   .eachJodel {
     border: 1px solid lightcoral;
     background-color: rgb(241, 176, 44);
@@ -52,7 +60,4 @@
     background-color: rgb(202, 153, 248);
     border-color: rgb(94, 94, 201);
   }
-
 }
-
-

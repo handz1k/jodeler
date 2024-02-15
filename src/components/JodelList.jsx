@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../App.jsx";
+import "../index.css";
 import jodelService from "../services/jodel.js";
 import JodelForm from "./JodelForm.jsx";
 import Jodel from "./Jodels.jsx";
@@ -17,6 +17,12 @@ const JodelList = () => {
 
   const jodelFormSubmission = (event) => {
     event.preventDefault();
+    const trimmedJodel = newJodel.trim();
+    if (!trimmedJodel || trimmedJodel.length < 3) {
+      console.error("Jodel must contain atleast 3 characters");
+      return;
+    }
+
     const jodelObject = { content: newJodel };
     setIsLoading(true);
     jodelService.create(jodelObject).then((returnedJodel) => {
