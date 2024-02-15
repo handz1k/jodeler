@@ -1,0 +1,58 @@
+:root {
+  .title {
+    text-align: center;
+  }
+
+  .jodel-form {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .button-primary {
+    background-color: rgb(241, 176, 44);
+    border-color: lightcoral;
+    transition-duration: 0.5s;
+  }
+
+  .button-primary:hover {
+    background-color: rgb(175, 119, 227);
+    border-color: rgb(94, 94, 201);
+  }
+
+  .button-primary:focus {
+    background-color: rgb(175, 119, 227);
+    border-color: rgb(94, 94, 201);
+
+  }
+
+  .loading {
+    width: 50%;
+    margin: 0 40%;
+    text-align: center;
+  }
+
+  .jodels {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 65%; /* Adjust this as needed */
+    margin: 0 auto; /* This will center your flex container */
+  }
+  
+  .eachJodel {
+    border: 1px solid lightcoral;
+    background-color: rgb(241, 176, 44);
+    border-radius: 10px;
+    padding: 30px 20px;
+    margin: 20px 0; /* This gives space between each jodel */
+    transition-duration: 1s;
+  }
+
+  .eachJodel:hover {
+    background-color: rgb(202, 153, 248);
+    border-color: rgb(94, 94, 201);
+  }
+
+}
+
+
