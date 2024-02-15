@@ -1,5 +1,5 @@
-# Simple jodel-clone that lets users interact with each other on various topics.
-
-This is a personal project and is heavily inspired by the Jodel app.
-
+# Simple jodel-clone
 # WIP WIP WIP
+
+This is a personal project and is heavily inspired by the Jodel app. Lets users interact with each other on various topics
+
