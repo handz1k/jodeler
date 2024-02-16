@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:5001/jodel";
+const baseUrl = "http://localhost:5001/api/jodel";
 
 let token = null;
 
@@ -9,6 +9,7 @@ const setToken = (newToken) => {
 
 const getAll = async () => {
   const request = await axios.get(baseUrl);
+  console.log("hmm");
   return request.data;
 };
 
