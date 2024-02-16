@@ -3,6 +3,7 @@ import "../index.css";
 import jodelService from "../services/jodel.js";
 import JodelForm from "./JodelForm.jsx";
 import Jodel from "./Jodels.jsx";
+import Title from "./Title.jsx";
 
 const JodelList = () => {
   const [newJodel, setNewJodel] = useState("");
@@ -39,18 +40,14 @@ const JodelList = () => {
 
   return (
     <div>
-      <h1 className="title">
-        Jodeler - Jodeling made <em> easy </em> ✨
-      </h1>
+      <Title />
       {!isLoading && (
         <div className="jodel-form">
-          <main>
-            <JodelForm
-              formSubmission={jodelFormSubmission}
-              formValue={newJodel}
-              formHandler={handleJodelChange}
-            />
-          </main>
+          <JodelForm
+            formSubmission={jodelFormSubmission}
+            formValue={newJodel}
+            formHandler={handleJodelChange}
+          />
         </div>
       )}
       {isLoading && (
