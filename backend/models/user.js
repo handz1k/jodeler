@@ -4,7 +4,7 @@ const uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, minLength: 3, unique: true },
-  password: { type: String, required: true, minLength: 3 },
+  passwordHash: { type: String, required: true, minLength: 3 },
   jodel: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Jodel",

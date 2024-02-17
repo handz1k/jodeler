@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 require("express-async-errors");
 
 jodelsRouter.get("/", async (req, res) => {
-  const jodels = await Jodel.find({});
+  const jodels = await Jodel.find({}).populate({ username: 1 });
   res.json(jodels);
 });
 
@@ -16,7 +16,6 @@ jodelsRouter.post("/", async (req, res) => {
   }
   const newJodel = new Jodel({
     content: body.content,
-    author: body.author,
     likes: body.likes,
   });
   const savedJodel = await newJodel.save();
