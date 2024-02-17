@@ -4,6 +4,15 @@ const Jodel = require("../models/jodel");
 const jwt = require("jsonwebtoken");
 require("express-async-errors");
 
+const extractAuthToken = (req) => {
+  bearerToken = req.get("authorization");
+  if (bearerToken && bearerToken.startsWith("Bearer ")) {
+    const token = bearerToken.split("")[1];
+    return token;
+  }
+  return null;
+};
+
 jodelsRouter.get("/", async (req, res) => {
   const jodels = await Jodel.find({}).populate({ username: 1 });
   res.json(jodels);
@@ -12,7 +21,12 @@ jodelsRouter.get("/", async (req, res) => {
 jodelsRouter.post("/", async (req, res) => {
   const body = req.body;
   if (!body.content === "") {
-    return res.status(400).send("Content cannot be empty");
+    return res.status(400).json("Content cannot be empty");
+  }
+  const decodedToken = jwt.verify(extractAuthToken(req), process.env.SECRET);
+
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: "token invalid" });
   }
   const newJodel = new Jodel({
     content: body.content,
@@ -25,7 +39,7 @@ jodelsRouter.post("/", async (req, res) => {
 jodelsRouter.delete("/:id", async (req, res) => {
   const idToRemove = req.params.id;
   await Jodel.findByIdAndDelete(idToRemove);
-  response.status(204).end();
+  res.status(204).end();
 });
 
 jodelsRouter.put("/:id", async (req, res) => {
@@ -38,7 +52,7 @@ jodelsRouter.put("/:id", async (req, res) => {
   const updatedJodel = await Blog.findByIdAndUpdate(req.params.id, jodel, {
     new: true,
   });
-  response.json(updatedJodel);
+  res.json(updatedJodel);
 });
 
 module.exports = jodelsRouter;
