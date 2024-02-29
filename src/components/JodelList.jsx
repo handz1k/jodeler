@@ -4,16 +4,28 @@ import jodelService from "../services/jodel.js";
 import JodelForm from "./JodelForm.jsx";
 import Jodel from "./Jodels.jsx";
 import Title from "./Title.jsx";
+import LoginForm from "./LoginForm.jsx";
 
 const JodelList = () => {
   const [newJodel, setNewJodel] = useState("");
   const [jodels, setJodels] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     jodelService.getAll().then((jodels) => {
       setJodels(jodels.reverse());
     });
+  }, []);
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      jodelService.setToken(user.token);
+      console.log(user);
+    }
   }, []);
 
   const jodelFormSubmission = (event) => {
@@ -30,7 +42,7 @@ const JodelList = () => {
       setJodels((jodels) => [returnedJodel, ...jodels]);
       setNewJodel("");
       setIsLoading(false);
-      console.log(returnedJodel);
+      console.log("dds");
     });
   };
 
@@ -38,19 +50,27 @@ const JodelList = () => {
     setNewJodel(event.target.value);
   };
 
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    window.localStorage.removeItem("loggedBlogappUser");
+    setUser("");
+  };
+
   return (
     <div>
+      {!user && <LoginForm />}
       <Title />
-      {!isLoading && (
+      {!isLoading && user && (
         <div className="jodel-form">
           <JodelForm
             formSubmission={jodelFormSubmission}
             formValue={newJodel}
             formHandler={handleJodelChange}
           />
+          <button onClick={handleLogout}></button>
         </div>
       )}
-      {isLoading && (
+      {isLoading && user && (
         <div className="loading">
           <img src="loader.gif"></img>
         </div>

@@ -6,7 +6,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<JodelList />} />
-      <Route path="/login" element={<LoginForm />} />
     </Routes>
   );
 }

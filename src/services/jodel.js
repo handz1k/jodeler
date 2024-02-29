@@ -9,7 +9,6 @@ const setToken = (newToken) => {
 
 const getAll = async () => {
   const request = await axios.get(baseUrl);
-  console.log("hmm");
   return request.data;
 };
 
@@ -17,14 +16,9 @@ const create = async (newObject) => {
   const config = {
     headers: { Authorization: token },
   };
-  try {
-    const response = await axios.post(baseUrl, newObject, config);
-    return response.data;
-  } catch (error) {
-    return error.response.data;
-  }
+  const response = await axios.post(baseUrl, newObject, config);
+  return response.data;
 };
-
 const deleteJodel = (id) => {
   return axios.delete(`${baseUrl}/${id}`);
 };

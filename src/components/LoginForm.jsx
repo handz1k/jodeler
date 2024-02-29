@@ -1,14 +1,23 @@
 import "../index.css";
 import { useState } from "react";
+import loginService from "../services/login";
+import jodelService from "../services/jodel";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (event) => {
+  const handleLogin = async (event) => {
     event.preventDefault();
-    //handle login
+    try {
+      const user = await loginService.login({ username, password });
+      window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
+      jodelService.setToken(user.token);
+    } catch (expection) {
+      console.log(expection);
+    }
   };
+
   return (
     <div className="login-form">
       <form onSubmit={handleLogin}>

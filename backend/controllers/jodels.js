@@ -7,7 +7,7 @@ require("express-async-errors");
 const extractAuthToken = (req) => {
   bearerToken = req.get("authorization");
   if (bearerToken && bearerToken.startsWith("Bearer ")) {
-    const token = bearerToken.split("")[1];
+    const token = bearerToken.split(" ")[1];
     return token;
   }
   return null;
@@ -24,7 +24,6 @@ jodelsRouter.post("/", async (req, res) => {
     return res.status(400).json("Content cannot be empty");
   }
   const decodedToken = jwt.verify(extractAuthToken(req), process.env.SECRET);
-
   if (!decodedToken.id) {
     return response.status(401).json({ error: "token invalid" });
   }
