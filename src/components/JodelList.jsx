@@ -5,11 +5,10 @@ import JodelForm from "./JodelForm.jsx";
 import Jodel from "./Jodels.jsx";
 import Title from "./Title.jsx";
 import LoginForm from "./LoginForm.jsx";
+import Loader from "./Loader.jsx";
 
 const JodelList = () => {
-  const [newJodel, setNewJodel] = useState("");
   const [jodels, setJodels] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [user, setUser] = useState("");
 
   useEffect(() => {
@@ -28,51 +27,28 @@ const JodelList = () => {
     }
   }, []);
 
-  const jodelFormSubmission = (event) => {
-    event.preventDefault();
-    const trimmedJodel = newJodel.trim();
-    if (!trimmedJodel || trimmedJodel.length < 3) {
-      console.error("Jodel must contain atleast 3 characters");
-      return;
-    }
-
-    const jodelObject = { content: newJodel };
-    setIsLoading(true);
-    jodelService.create(jodelObject).then((returnedJodel) => {
-      setJodels((jodels) => [returnedJodel, ...jodels]);
-      setNewJodel("");
-      setIsLoading(false);
-      console.log("dds");
-    });
+  const handleUserLogin = (user) => {
+    setUser(user);
   };
 
-  const handleJodelChange = (event) => {
-    setNewJodel(event.target.value);
-  };
-
-  const handleLogout = async (event) => {
+  const handleUserLogout = (event) => {
     event.preventDefault();
     window.localStorage.removeItem("loggedBlogappUser");
     setUser("");
   };
 
+  const handleBlogListExpansion = (returnedJodel) => {
+    setJodels([returnedJodel, ...jodels]);
+  };
+
   return (
     <div>
-      {!user && <LoginForm />}
+      {!user && <LoginForm onLoginSuccess={handleUserLogin} />}
       <Title />
-      {!isLoading && user && (
+      {user && (
         <div className="jodel-form">
-          <JodelForm
-            formSubmission={jodelFormSubmission}
-            formValue={newJodel}
-            formHandler={handleJodelChange}
-          />
-          <button onClick={handleLogout}></button>
-        </div>
-      )}
-      {isLoading && user && (
-        <div className="loading">
-          <img src="loader.gif"></img>
+          <JodelForm onJodelPost={handleBlogListExpansion} />
+          <button onClick={handleUserLogout}></button>
         </div>
       )}
       <div className="jodels">

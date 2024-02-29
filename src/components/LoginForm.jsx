@@ -3,7 +3,7 @@ import { useState } from "react";
 import loginService from "../services/login";
 import jodelService from "../services/jodel";
 
-const LoginForm = () => {
+const LoginForm = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,6 +13,7 @@ const LoginForm = () => {
       const user = await loginService.login({ username, password });
       window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       jodelService.setToken(user.token);
+      onLoginSuccess(user);
     } catch (expection) {
       console.log(expection);
     }
