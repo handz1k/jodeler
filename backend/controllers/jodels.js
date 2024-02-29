@@ -14,7 +14,7 @@ const extractAuthToken = (req) => {
 };
 
 jodelsRouter.get("/", async (req, res) => {
-  const jodels = await Jodel.find({}).populate({ username: 1 });
+  const jodels = await Jodel.find({}).populate("user", { username: 1 });
   res.json(jodels);
 });
 
