@@ -2,10 +2,12 @@ import "../index.css";
 import { useState } from "react";
 import loginService from "../services/login";
 import jodelService from "../services/jodel";
+import Notification from "./Notification";
 
 const LoginForm = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [notification, setNotification] = useState("");
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -15,12 +17,16 @@ const LoginForm = ({ onLoginSuccess }) => {
       jodelService.setToken(user.token);
       onLoginSuccess(user);
     } catch (expection) {
-      console.log(expection);
+      setNotification("invalid username or password");
+      setTimeout(() => {
+        setNotification("");
+      }, 2000);
     }
   };
 
   return (
     <div className="login-form">
+      <Notification message={notification} />
       <form onSubmit={handleLogin}>
         <h2>
           Login to <i>Jodeler ✨</i>

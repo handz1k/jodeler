@@ -43,20 +43,22 @@ const JodelList = () => {
   return (
     <div>
       {!user && <LoginForm onLoginSuccess={handleUserLogin} />}
-      <Title />
       {user && (
-        <div className="jodel-form">
-          <JodelForm onJodelPost={handleBlogListExpansion} />
-          <button onClick={handleUserLogout}></button>
+        <div>
+          <Title />
+          <div className="jodel-form">
+            <JodelForm onJodelPost={handleBlogListExpansion} />
+            <button onClick={handleUserLogout}></button>
+          </div>
+          <div className="jodels">
+            <ul>
+              {jodels.map((jodel) => (
+                <Jodel key={jodel.id} jodel={jodel} />
+              ))}
+            </ul>
+          </div>
         </div>
       )}
-      <div className="jodels">
-        <ul>
-          {jodels.map((jodel) => (
-            <Jodel key={jodel.id} jodel={jodel} />
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
