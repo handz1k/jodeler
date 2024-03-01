@@ -1,11 +1,10 @@
-import JodelList from "./components/JodelList";
-import LoginForm from "./components/LoginForm";
+import MainPage from "./components/MainPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<JodelList />} />
+      <Route path="/" element={<MainPage />} />
     </Routes>
   );
 }

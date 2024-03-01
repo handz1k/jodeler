@@ -5,7 +5,6 @@ import JodelForm from "./JodelForm.jsx";
 import Jodel from "./Jodels.jsx";
 import Title from "./Title.jsx";
 import LoginForm from "./LoginForm.jsx";
-import Loader from "./Loader.jsx";
 
 const JodelList = () => {
   const [jodels, setJodels] = useState([]);
