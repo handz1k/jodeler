@@ -10,6 +10,12 @@ usersRouter.get("/", async (req, res) => {
 
 usersRouter.post("/", async (req, res) => {
   const { username, password } = req.body;
+  const userInDb = await User.findOne({ username });
+  if (userInDb) {
+    return res.status(409).json({
+      error: "Account already in DB",
+    });
+  }
   const saltRounds = 10;
   const passwordHash = await bcrypt.hash(password, saltRounds);
   const user = new User({

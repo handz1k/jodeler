@@ -1,7 +1,11 @@
 import "../styles/SignupBox.css";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import userService from "../services/user";
 
 const CreateAccount = () => {
-  const accountCreation = (event) => {
+  const navigateTo = useNavigate();
+  const accountCreation = async (event) => {
     event.preventDefault();
     const username = event.target.username.value;
     const password = event.target.password.value;
@@ -11,7 +15,12 @@ const CreateAccount = () => {
       password.length >= 3 &&
       username.length >= 3
     ) {
-      console.log("post account");
+      try {
+        await userService.create({ username, password });
+        navigateTo("/");
+      } catch (expection) {
+        console.log(expection.response.data.error);
+      }
     } else {
       console.log("error");
     }
@@ -22,9 +31,9 @@ const CreateAccount = () => {
       <a href="/">
         <b>&lt;--</b>
       </a>
-      <div class="tooltip">
+      <div className="tooltip">
         <u>i</u>
-        <span class="tooltiptext">
+        <span className="tooltiptext">
           Username and password must be at least 3 characters long.
         </span>
       </div>
