@@ -9,13 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 const LoginForm = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [notification, setNotification] = useState("");
   const toastId = useRef(null);
 
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-      toastId.current = toast.loading("Loading...");
+      toastId.current = toast.loading("Loading...", {
+        position: "bottom-left",
+      });
       const user = await loginService.login({ username, password });
       window.localStorage.setItem("loggedBlogappUser", JSON.stringify(user));
       jodelService.setToken(user.token);
@@ -33,7 +34,6 @@ const LoginForm = ({ onLoginSuccess }) => {
 
   return (
     <div className="login-form">
-      <Notification message={notification} />
       <ToastContainer />
       <form onSubmit={handleLogin}>
         <h2>
@@ -57,7 +57,11 @@ const LoginForm = ({ onLoginSuccess }) => {
           <button className="login-button">Log in</button>
         </div>
         <div>
-          <u>enter</u> as a guest or <u>create</u> an account
+          <u>enter</u> as a guest or{" "}
+          <u>
+            <a href="/create">create</a>
+          </u>{" "}
+          an account
         </div>
       </form>
     </div>
