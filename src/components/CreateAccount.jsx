@@ -19,6 +19,16 @@ const CreateAccount = () => {
 
   return (
     <div className="signup-box">
+      <a href="/">
+        <b>&lt;--</b>
+      </a>
+      <div class="tooltip">
+        <u>i</u>
+        <span class="tooltiptext">
+          Username and password must be at least 3 characters long.
+        </span>
+      </div>
+      <h1> </h1>
       <h2>Sign up</h2>
       <form onSubmit={accountCreation}>
         <div className="input-group">
