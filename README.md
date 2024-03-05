@@ -8,7 +8,7 @@ This is a personal project and is inspired by the Jodel app. Lets users interact
 
 ![GIF of account creation](./docs/jodelercreate.gif)
 
-## login screen image
+## login screen
 
 ![Image of the login screen](./docs/wip1.JPG)
 
