@@ -39,6 +39,13 @@
     text-align: center;
   }
 
+  .logoutbutton {
+    position: absolute;
+    right: 0;
+    margin-right: 50px;
+    margin-top: 20px;
+  }
+
   .jodels {
     display: flex;
     flex-direction: column;

@@ -45,10 +45,12 @@ const JodelList = () => {
       {!user && <LoginForm onLoginSuccess={handleUserLogin} />}
       {user && (
         <div>
+          <button className="logoutbutton" onClick={handleUserLogout}>
+            log out
+          </button>
           <Title />
           <div className="jodel-form">
             <JodelForm onJodelPost={handleBlogListExpansion} />
-            <button onClick={handleUserLogout}></button>
           </div>
           <div className="jodels">
             <ul>
