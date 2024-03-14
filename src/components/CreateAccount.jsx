@@ -1,9 +1,12 @@
 import "../styles/SignupBox.css";
 import React from "react";
+import ErrorNotification from "./ErrorNotification";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import userService from "../services/user";
 
 const CreateAccount = () => {
+  const [notification, setNotification] = useState("");
   const navigateTo = useNavigate();
   const accountCreation = async (event) => {
     event.preventDefault();
@@ -22,7 +25,12 @@ const CreateAccount = () => {
         console.log(expection.response.data.error);
       }
     } else {
-      console.log("error");
+      setNotification(
+        "the username and password must be atleast 3 characters long"
+      );
+      setTimeout(() => {
+        setNotification("");
+      }, 5000);
     }
   };
 
@@ -58,6 +66,7 @@ const CreateAccount = () => {
           />
         </div>
         <button>Create account</button>
+        <ErrorNotification message={notification} />
       </form>
     </div>
   );

@@ -2,7 +2,6 @@ import "../index.css";
 import { useState, useRef } from "react";
 import loginService from "../services/login";
 import jodelService from "../services/jodel";
-import Notification from "./Notification";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
